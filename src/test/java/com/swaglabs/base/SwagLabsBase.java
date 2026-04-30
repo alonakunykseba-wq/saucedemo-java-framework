@@ -8,10 +8,10 @@ public class SwagLabsBase extends BaseTest {
     protected ProductsOverviewPage productsOverviewPage;
 
     @BeforeMethod(dependsOnMethods = "setup")
-
     public void navigate() {
         driver.get(getProperty("sauce_url"));
     }
+
     public ProductsOverviewPage getProductsOverviewPage() {
         return this.productsOverviewPage;
     }

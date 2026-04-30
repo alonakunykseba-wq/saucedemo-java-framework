@@ -1,10 +1,9 @@
 package com.swaglabs.tests;
 
-import com.swaglabs.base.SwagLabsBase;
+import com.swaglabs.base.LoggedInBaseTest;
 import framework.pages.swagLabs.ProductDetailsPage;
 import io.qameta.allure.Description;
 import org.assertj.core.api.SoftAssertions;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.Comparator;
@@ -12,16 +11,8 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CatalogTest extends SwagLabsBase {
-    protected SoftAssertions softly;
-    @BeforeMethod
-    public void setupTestState() {
-       softly = new SoftAssertions();
-        loginAsStandardUser();
-        assertThat(getProductsOverviewPage().getPageTitle())
-                .withFailMessage("Page title is not as expected")
-                .isEqualTo("Products");
-    }
+public class CatalogTest extends LoggedInBaseTest {
+
     // Test is currently disabled because the "Test.allTheThings() T-Shirt"
     // violates the Sauce Labs branding rules. This is a known bug on the site.
     @Test(enabled = false, description = "TC-05: verifyProductCatalogCountAndBrandingConsistency")
