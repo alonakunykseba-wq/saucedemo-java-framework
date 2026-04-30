@@ -3,7 +3,6 @@ package com.swaglabs.tests;
 import com.swaglabs.base.LoggedInBaseTest;
 import framework.pages.swagLabs.ProductDetailsPage;
 import io.qameta.allure.Description;
-import org.assertj.core.api.SoftAssertions;
 import org.testng.annotations.Test;
 
 import java.util.Comparator;
