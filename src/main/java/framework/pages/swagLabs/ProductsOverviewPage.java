@@ -41,8 +41,14 @@ public class ProductsOverviewPage extends BasePage {
         return new ProductDetailsPage(driver);
     }
 
-    public ArrayList<String> getProductPrices(){
+    public ArrayList<String> getProductPricesWithCurrency(){
         return getTexts(productPriceSelector);
+    }
+
+    public List<Double> getProductPrices(){
+        return  getProductPricesWithCurrency().stream()
+                .map(price->Double.parseDouble(price.replace("$", "") ))
+                .toList();
     }
 
     public double getProductPriceByName(String productName){

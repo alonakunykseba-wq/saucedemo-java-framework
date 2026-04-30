@@ -22,7 +22,8 @@ public class CatalogTest extends SwagLabsBase {
                 .withFailMessage("Page title is not as expected")
                 .isEqualTo("Products");
     }
-
+    // Test is currently disabled because the "Test.allTheThings() T-Shirt"
+    // violates the Sauce Labs branding rules. This is a known bug on the site.
     @Test(enabled = false, description = "TC-05: verifyProductCatalogCountAndBrandingConsistency")
     @Description("""
             Verifies the integrity of the product catalog by ensuring that exactly 6 products are loaded on the page,
@@ -42,12 +43,14 @@ public class CatalogTest extends SwagLabsBase {
         softly.assertThat(productNamesList.size())
                 .withFailMessage("The products page contains less products than expected")
                 .isEqualTo(6);
-        softly.assertThat(productsOverviewPage.getProductPrices())
+        softly.assertThat(productsOverviewPage.getProductPricesWithCurrency())
                 .withFailMessage("Product price currency is not USD")
                 .allMatch(price -> price.startsWith("$"));
         softly.assertAll();
     }
 
+    // Test is currently disabled because the "Test.allTheThings() T-Shirt"
+    // violates the Sauce Labs branding rules. This is a known bug on the site.
     @Test (description ="TC-06: verifyHighToLowPriceSortingLogic")
     @Description("""
             Validates the catalog sorting mechanism by applying the 'Price (high to low)' filter and
@@ -55,11 +58,7 @@ public class CatalogTest extends SwagLabsBase {
             """)
     public void verifyHighToLowPriceSortingLogic(){
         productsOverviewPage.applySortingFilter("Price (high to low)");
-        List<String> productPriceList = productsOverviewPage.getProductPrices();
-        List<Double> sortedPriceList = productPriceList.stream()
-                .map(price->Double.parseDouble(price.replace("$", "") ))
-                .toList();
-        assertThat(sortedPriceList)
+        assertThat(productsOverviewPage.getProductPrices())
                 .withFailMessage("The prices are not sorted in descending order")
                 .isSortedAccordingTo(Comparator.reverseOrder());
     }
