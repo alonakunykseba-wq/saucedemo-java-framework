@@ -63,7 +63,7 @@ public class ProductsOverviewPage extends BasePage {
 
     public void addProductToTheCartByPrice(double price){
         By addToCartLocator = By.xpath(
-                String.format(Locale.US,"//div[@class='inventory_item_price' and text()='$%.2f']/following-sibling::button", price));
+                String.format(Locale.US,"//div[@class='inventory_item_price' and contains(.,'$%.2f')]/following-sibling::button", price));
         click(addToCartLocator);
     }
 

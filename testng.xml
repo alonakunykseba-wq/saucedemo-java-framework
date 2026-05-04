@@ -77,5 +77,14 @@
             </class>
         </classes>
     </test>
+    <test name="TC-07: verifyHighestPriceItemCanBeAddedToCart">
+        <classes>
+            <class name="com.swaglabs.tests.ShoppingCartTest">
+                <methods>
+                    <include name="verifyHighestPriceItemCanBeAddedToCart"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>
 
