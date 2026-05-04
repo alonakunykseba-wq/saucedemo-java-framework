@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
 public class ProductsOverviewPage extends BasePage {
@@ -16,6 +17,7 @@ public class ProductsOverviewPage extends BasePage {
     private final By productNameSelector = By.cssSelector(".inventory_item_name");
     private final By productPriceSelector = By.cssSelector(".inventory_item_price");
     private final By sortingDropdownSelector = By.className("product_sort_container");
+    private final By shoppingCartSelector = By.className("shopping_cart_container");
 
     public ProductsOverviewPage(WebDriver driver) {
         super(driver);
@@ -57,6 +59,17 @@ public class ProductsOverviewPage extends BasePage {
                 productName
         );
         return Double.parseDouble(getText(By.xpath(priceLocator)).replace("$", ""));
+    }
+
+    public void addProductToTheCartByPrice(double price){
+        By addToCartLocator = By.xpath(
+                String.format(Locale.US,"//div[@class='inventory_item_price' and text()='$%.2f']/following-sibling::button", price));
+        click(addToCartLocator);
+    };
+
+    public ShoppingCartPage clickShoppingCart(){
+        click(shoppingCartSelector);
+        return new ShoppingCartPage(driver);
     }
 
     public void applySortingFilter(String sortingMethodName){

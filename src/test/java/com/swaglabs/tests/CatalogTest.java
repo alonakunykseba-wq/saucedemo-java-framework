@@ -43,8 +43,8 @@ public class CatalogTest extends LoggedInBaseTest {
     // violates the Sauce Labs branding rules. This is a known bug on the site.
     @Test (description ="TC-06: verifyHighToLowPriceSortingLogic")
     @Description("""
-            Validates the catalog sorting mechanism by applying the 'Price (high to low)' filter and
-            verifying that all product prices on the page are mathematically rearranged in strictly descending order.
+            Verifies that the catalog sorting mechanism successfully applies the 'Price (high to low)' filter,
+                        and correctly rearranges all product prices on the page into strictly descending order.
             """)
     public void verifyHighToLowPriceSortingLogic(){
         productsOverviewPage.applySortingFilter("Price (high to low)");
