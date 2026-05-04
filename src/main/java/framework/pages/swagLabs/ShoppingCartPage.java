@@ -7,7 +7,7 @@ import java.util.List;
 
 public class ShoppingCartPage extends BasePage{
 
-    private final By productPriceSelector = By.cssSelector(".inventory_item_price");;
+    private final By productPriceSelector = By.cssSelector(".inventory_item_price");
 
     public ShoppingCartPage(WebDriver driver) {
         super(driver);

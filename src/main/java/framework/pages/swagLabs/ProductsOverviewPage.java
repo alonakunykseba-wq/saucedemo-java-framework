@@ -65,7 +65,7 @@ public class ProductsOverviewPage extends BasePage {
         By addToCartLocator = By.xpath(
                 String.format(Locale.US,"//div[@class='inventory_item_price' and text()='$%.2f']/following-sibling::button", price));
         click(addToCartLocator);
-    };
+    }
 
     public ShoppingCartPage clickShoppingCart(){
         click(shoppingCartSelector);
