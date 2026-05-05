@@ -86,5 +86,14 @@
             </class>
         </classes>
     </test>
+    <test name ="TC-08: verifyCartBadgeUpdatesWhenProductIsAdded">
+        <classes>
+            <class name ="com.swaglabs.tests.ShoppingCartTest">
+                <methods>
+                    <include name ="verifyCartBadgeUpdatesWhenProductIsAdded"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>
 

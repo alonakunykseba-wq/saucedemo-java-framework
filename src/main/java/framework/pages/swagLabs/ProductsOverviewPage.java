@@ -17,7 +17,10 @@ public class ProductsOverviewPage extends BasePage {
     private final By productNameSelector = By.cssSelector(".inventory_item_name");
     private final By productPriceSelector = By.cssSelector(".inventory_item_price");
     private final By sortingDropdownSelector = By.className("product_sort_container");
-    private final By shoppingCartSelector = By.className("shopping_cart_container");
+    private final By shoppingCartSelector = By.cssSelector("a[data-test='shopping-cart-link']");
+    private final By shoppingCartBadgeSelector = By.cssSelector(".shopping_cart_badge");
+    private final By removeButtonSelector = By.xpath("//button[contains(text(), 'Remove')]");
+    private final By addButtonSelector = By.xpath("//button[contains(text(), 'Add to cart')]");
 
     public ProductsOverviewPage(WebDriver driver) {
         super(driver);
@@ -31,29 +34,29 @@ public class ProductsOverviewPage extends BasePage {
         return getTexts(productNameSelector);
     }
 
-    public String selectRandomProductName(){
+    public String selectRandomProductName() {
         List<String> products = getProductNames();
         int randomIndex = new Random().nextInt(products.size());
-        return  products.get(randomIndex);
+        return products.get(randomIndex);
     }
 
-    public ProductDetailsPage clickRandomProductLink(String randomProduct){
+    public ProductDetailsPage clickRandomProductLink(String randomProduct) {
         String randomProductSelector = String.format("//div[@data-test='inventory-item-name' and text()='%s']", randomProduct);
         click(By.xpath(randomProductSelector));
         return new ProductDetailsPage(driver);
     }
 
-    public ArrayList<String> getProductPricesWithCurrency(){
+    public ArrayList<String> getProductPricesWithCurrency() {
         return getTexts(productPriceSelector);
     }
 
-    public List<Double> getProductPrices(){
-        return  getProductPricesWithCurrency().stream()
-                .map(price->Double.parseDouble(price.replace("$", "") ))
+    public List<Double> getProductPrices() {
+        return getProductPricesWithCurrency().stream()
+                .map(price -> Double.parseDouble(price.replace("$", "")))
                 .toList();
     }
 
-    public double getProductPriceByName(String productName){
+    public double getProductPriceByName(String productName) {
         String priceLocator = String.format(
                 "//div[text()='%s']/ancestor::div[@class='inventory_item_description']//div[@data-test='inventory-item-price']",
                 productName
@@ -61,20 +64,43 @@ public class ProductsOverviewPage extends BasePage {
         return Double.parseDouble(getText(By.xpath(priceLocator)).replace("$", ""));
     }
 
-    public void addProductToTheCartByPrice(double price){
-        By addToCartLocator = By.xpath(
-                String.format(Locale.US,"//div[@class='inventory_item_price' and contains(.,'$%.2f')]/following-sibling::button", price));
-        click(addToCartLocator);
-    }
-
-    public ShoppingCartPage clickShoppingCart(){
-        click(shoppingCartSelector);
-        return new ShoppingCartPage(driver);
-    }
-
-    public void applySortingFilter(String sortingMethodName){
+    public void applySortingFilter(String sortingMethodName) {
         WebElement sortingDropdownElement = wait.until(ExpectedConditions.visibilityOfElementLocated(sortingDropdownSelector));
         Select dropdown = new Select(sortingDropdownElement);
         dropdown.selectByVisibleText(sortingMethodName);
+    }
+
+    public void addProductToTheCartByPrice(double price) {
+        By addToCartLocator = By.xpath(
+                String.format(Locale.US, "//div[@class='inventory_item_price' and contains(.,'$%.2f')]/following-sibling::button", price));
+        click(addToCartLocator);
+    }
+
+    public void addProductsToTheCart(int amount) {
+        for (int x = 0; x < amount; x++) {
+           click(addButtonSelector);
+        }
+    }
+
+    public boolean areRemoveButtonsDisplayed() {
+        return !driver.findElements(removeButtonSelector).isEmpty();
+    }
+
+    public void clickRemoveButton(){
+        click(removeButtonSelector);
+    }
+
+    public boolean isShoppingCartBadgeDisplayed() {
+        return !driver.findElements(shoppingCartBadgeSelector).isEmpty();
+    }
+
+    public int getProductsAmountInTheCart(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(shoppingCartBadgeSelector));
+        return Integer.parseInt(getText(shoppingCartBadgeSelector));
+    }
+
+    public ShoppingCartPage clickShoppingCart() {
+        click(shoppingCartSelector);
+        return new ShoppingCartPage(driver);
     }
 }
