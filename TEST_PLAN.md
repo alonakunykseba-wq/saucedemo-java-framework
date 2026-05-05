@@ -49,7 +49,7 @@ This document outlines test scenarios designed to validate the functional integr
 
 **TC-09: verifyCheckoutTotalsAndTaxCalculationsAreAccurate**
 * **Goal:** Verify the system calculates item totals and taxes accurately.
-* **Verification:** Assert that the sum of individual items matches the subtotal and the final total inc    ludes the correct tax amount.
+* **Verification:** Assert that the sum of individual items matches the subtotal and the final total includes the correct tax amount.
 
 ---
 
