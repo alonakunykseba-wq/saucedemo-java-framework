@@ -77,5 +77,32 @@
             </class>
         </classes>
     </test>
+    <test name="TC-07: verifyHighestPriceItemCanBeAddedToCart">
+        <classes>
+            <class name="com.swaglabs.tests.ShoppingCartTest">
+                <methods>
+                    <include name="verifyHighestPriceItemCanBeAddedToCart"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name ="TC-08: verifyCartBadgeUpdatesWhenProductIsAdded">
+        <classes>
+            <class name ="com.swaglabs.tests.ShoppingCartTest">
+                <methods>
+                    <include name ="verifyCartBadgeUpdatesWhenProductIsAdded"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name ="TC-09: verifyCheckoutTotalsAndTaxCalculationsAreAccurate">
+        <classes>
+            <class name ="com.swaglabs.tests.ShoppingCartTest">
+                <methods>
+                    <include name ="verifyCheckoutTotalsAndTaxCalculationsAreAccurate"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>
 

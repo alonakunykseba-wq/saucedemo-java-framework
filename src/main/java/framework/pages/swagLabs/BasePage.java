@@ -13,6 +13,7 @@ import java.util.List;
 public class BasePage {
     protected WebDriver driver;
     protected WebDriverWait wait;
+    private final By productPriceSelector = By.cssSelector(".inventory_item_price");
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
@@ -41,5 +42,15 @@ public class BasePage {
             textList.add(el.getText());
         }
         return textList;
+    }
+
+    public ArrayList<String> getProductPricesWithCurrency() {
+        return getTexts(productPriceSelector);
+    }
+
+    public List<Double> getProductPrices() {
+        return getProductPricesWithCurrency().stream()
+                .map(price -> Double.parseDouble(price.replace("$", "")))
+                .toList();
     }
 }

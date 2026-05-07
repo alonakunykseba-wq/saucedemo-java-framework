@@ -1,10 +1,8 @@
 package com.swaglabs.tests;
 
-import com.swaglabs.base.SwagLabsBase;
+import com.swaglabs.base.LoggedInBaseTest;
 import framework.pages.swagLabs.ProductDetailsPage;
 import io.qameta.allure.Description;
-import org.assertj.core.api.SoftAssertions;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.Comparator;
@@ -12,17 +10,10 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CatalogTest extends SwagLabsBase {
-    protected SoftAssertions softly;
-    @BeforeMethod
-    public void setupTestState() {
-       softly = new SoftAssertions();
-        loginAsStandardUser();
-        assertThat(getProductsOverviewPage().getPageTitle())
-                .withFailMessage("Page title is not as expected")
-                .isEqualTo("Products");
-    }
+public class CatalogTest extends LoggedInBaseTest {
 
+    // Test is currently disabled because the "Test.allTheThings() T-Shirt"
+    // violates the Sauce Labs branding rules. This is a known bug on the site.
     @Test(enabled = false, description = "TC-05: verifyProductCatalogCountAndBrandingConsistency")
     @Description("""
             Verifies the integrity of the product catalog by ensuring that exactly 6 products are loaded on the page,
@@ -42,24 +33,22 @@ public class CatalogTest extends SwagLabsBase {
         softly.assertThat(productNamesList.size())
                 .withFailMessage("The products page contains less products than expected")
                 .isEqualTo(6);
-        softly.assertThat(productsOverviewPage.getProductPrices())
+        softly.assertThat(productsOverviewPage.getProductPricesWithCurrency())
                 .withFailMessage("Product price currency is not USD")
                 .allMatch(price -> price.startsWith("$"));
         softly.assertAll();
     }
 
+    // Test is currently disabled because the "Test.allTheThings() T-Shirt"
+    // violates the Sauce Labs branding rules. This is a known bug on the site.
     @Test (description ="TC-06: verifyHighToLowPriceSortingLogic")
     @Description("""
-            Validates the catalog sorting mechanism by applying the 'Price (high to low)' filter and
-            verifying that all product prices on the page are mathematically rearranged in strictly descending order.
+            Verifies that the catalog sorting mechanism successfully applies the 'Price (high to low)' filter,
+                        and correctly rearranges all product prices on the page into strictly descending order.
             """)
     public void verifyHighToLowPriceSortingLogic(){
         productsOverviewPage.applySortingFilter("Price (high to low)");
-        List<String> productPriceList = productsOverviewPage.getProductPrices();
-        List<Double> sortedPriceList = productPriceList.stream()
-                .map(price->Double.parseDouble(price.replace("$", "") ))
-                .toList();
-        assertThat(sortedPriceList)
+        assertThat(productsOverviewPage.getProductPrices())
                 .withFailMessage("The prices are not sorted in descending order")
                 .isSortedAccordingTo(Comparator.reverseOrder());
     }
