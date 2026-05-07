@@ -15,7 +15,7 @@ public class ProductsOverviewPage extends BasePage {
 
     private final By title = By.cssSelector(".title");
     private final By productNameSelector = By.cssSelector(".inventory_item_name");
-    private final By productPriceSelector = By.cssSelector(".inventory_item_price");
+
     private final By sortingDropdownSelector = By.className("product_sort_container");
     private final By shoppingCartSelector = By.cssSelector("a[data-test='shopping-cart-link']");
     private final By shoppingCartBadgeSelector = By.cssSelector(".shopping_cart_badge");
@@ -44,16 +44,6 @@ public class ProductsOverviewPage extends BasePage {
         String randomProductSelector = String.format("//div[@data-test='inventory-item-name' and text()='%s']", randomProduct);
         click(By.xpath(randomProductSelector));
         return new ProductDetailsPage(driver);
-    }
-
-    public ArrayList<String> getProductPricesWithCurrency() {
-        return getTexts(productPriceSelector);
-    }
-
-    public List<Double> getProductPrices() {
-        return getProductPricesWithCurrency().stream()
-                .map(price -> Double.parseDouble(price.replace("$", "")))
-                .toList();
     }
 
     public double getProductPriceByName(String productName) {

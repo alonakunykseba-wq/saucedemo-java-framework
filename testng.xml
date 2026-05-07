@@ -95,5 +95,14 @@
             </class>
         </classes>
     </test>
+    <test name ="TC-09: verifyCheckoutTotalsAndTaxCalculationsAreAccurate">
+        <classes>
+            <class name ="com.swaglabs.tests.ShoppingCartTest">
+                <methods>
+                    <include name ="verifyCheckoutTotalsAndTaxCalculationsAreAccurate"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>
 
