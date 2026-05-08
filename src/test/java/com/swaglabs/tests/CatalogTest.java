@@ -39,8 +39,6 @@ public class CatalogTest extends LoggedInBaseTest {
         softly.assertAll();
     }
 
-    // Test is currently disabled because the "Test.allTheThings() T-Shirt"
-    // violates the Sauce Labs branding rules. This is a known bug on the site.
     @Test (description ="TC-06: verifyHighToLowPriceSortingLogic")
     @Description("""
             Verifies that the catalog sorting mechanism successfully applies the 'Price (high to low)' filter,

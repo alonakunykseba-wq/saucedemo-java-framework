@@ -8,25 +8,24 @@ public class CheckoutInformationPage extends BasePage{
     private final By lastNameFieldSelector = By.cssSelector("input[data-test='lastName']");
     private final By postalCodeSelector = By.cssSelector("input[data-test='postalCode']");
     private final By continueButtonSelector = By.cssSelector("input[data-test='continue']");
+    private final By errorSelector = By.cssSelector("h3[data-test = 'error']");
 
     public CheckoutInformationPage(WebDriver driver) {
         super(driver);
     }
 
-    public void typeFirstName(String firstName){
+    public void fillTheForm(String firstName,String lastName, String postalCode){
         enterText(firstNameFieldSelector, firstName);
-    }
-
-    public void typeLastName(String lastName){
         enterText(lastNameFieldSelector, lastName);
-    }
-
-    public void typePostalCode(String postalCode){
         enterText(postalCodeSelector, postalCode);
     }
 
     public CheckoutOverviewPage clickContinueButton(){
         click(continueButtonSelector);
         return new CheckoutOverviewPage(driver);
+    }
+
+    public String getError(){
+        return getText(errorSelector);
     }
 }

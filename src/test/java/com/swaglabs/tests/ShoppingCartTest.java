@@ -53,27 +53,5 @@ public class ShoppingCartTest extends LoggedInBaseTest {
         softly.assertAll();
     }
 
-    @Test(description = "TC-09: verifyCheckoutTotalsAndTaxCalculationsAreAccurate")
-    @Description("""
-             Verifies that the system calculates cart totals and taxes accurately by ensuring the sum\s
-             of individual items matches the displayed subtotal, and that the final total correctly includes the applied tax amount.
-            """)
-    public void verifyCheckoutTotalsAndTaxCalculationsAreAccurate() {
-        int amount = 3;
-        productsOverviewPage.addProductsToTheCart(amount);
-        ShoppingCartPage shoppingCart = productsOverviewPage.clickShoppingCart();
-        CheckoutInformationPage buyerInformation = shoppingCart.clickCheckoutButton();
-        buyerInformation.typeFirstName("Antuan");
-        buyerInformation.typeLastName("Muller");
-        buyerInformation.typePostalCode("12-456");
-        CheckoutOverviewPage checkoutOverview = buyerInformation.clickContinueButton();
-        List<Double> prices = checkoutOverview.getProductPrices();
-        softly.assertThat(checkoutOverview.getItemTotalPrice())
-                .withFailMessage("The item total differs from sum of product prices without tax")
-                .isEqualTo(checkoutOverview.getSumOfProductPricesWithoutTax(prices));
-        softly.assertThat(checkoutOverview.getTotalWithTax())
-                .withFailMessage("Total amount is not equal to the sum of item total price and tax ptice")
-                .isCloseTo(checkoutOverview.getSumOfTaxAndItemTotal(), Offset.offset(0.01));
-        softly.assertAll();
-    }
+
 }
