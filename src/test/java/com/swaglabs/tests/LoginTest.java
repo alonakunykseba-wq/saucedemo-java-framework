@@ -3,7 +3,6 @@ import com.swaglabs.base.SwagLabsBase;
 
 import io.qameta.allure.Description;
 import org.testng.annotations.DataProvider;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

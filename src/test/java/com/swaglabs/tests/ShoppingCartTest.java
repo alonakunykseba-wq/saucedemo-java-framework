@@ -1,15 +1,10 @@
 package com.swaglabs.tests;
 
 import com.swaglabs.base.LoggedInBaseTest;
-import framework.pages.swagLabs.CheckoutInformationPage;
-import framework.pages.swagLabs.CheckoutOverviewPage;
 import framework.pages.swagLabs.ShoppingCartPage;
 import io.qameta.allure.Description;
-import org.assertj.core.data.Offset;
 import org.testng.annotations.Test;
-
 import java.util.Collections;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
