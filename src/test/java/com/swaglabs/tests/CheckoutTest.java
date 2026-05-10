@@ -1,6 +1,7 @@
 package com.swaglabs.tests;
 
 import com.swaglabs.base.LoggedInBaseTest;
+import framework.pages.swagLabs.CheckoutCompletePage;
 import framework.pages.swagLabs.CheckoutInformationPage;
 import framework.pages.swagLabs.CheckoutOverviewPage;
 import io.qameta.allure.Description;
@@ -48,7 +49,28 @@ public class CheckoutTest extends LoggedInBaseTest {
         softly.assertAll();
     }
 
-    @Test(dataProvider = "checkoutInformation", description = "TC-10: verifyCheckoutFormValidationMessagesForMissingFields")
+    @Test(description = "TC-10: verifyCheckoutIsSuccessfullyFinished")
+    @Description("""  
+            Verifies the end-to-end Happy Path purchase flow.
+            Ensures that a user can successfully add an item to the cart, provide valid checkout information, 
+            submit the final order, and receive the correct order confirmation message.
+    """)
+    public void verifyCheckoutIsSuccessfullyFinished(){
+        int amount = 3;
+        CheckoutInformationPage buyerInformation = navigateToCheckoutForm(amount);
+        buyerInformation.fillTheForm("Antuan", "Muller","12-456");
+        CheckoutOverviewPage checkoutOverview = buyerInformation.clickContinueButton();
+        CheckoutCompletePage checkoutComplete = checkoutOverview.clickFinish();
+        softly.assertThat(checkoutComplete.getCompleteOrderHeader())
+                .withFailMessage("The complete order header is not as expected")
+                .isEqualTo("Thank you for your order!");
+        softly.assertThat(checkoutComplete.getCompleteOrderText())
+                .withFailMessage("The complete order text is not as expected")
+                .isEqualTo("Your order has been dispatched, and will arrive just as fast as the pony can get there!");
+        softly.assertAll();
+    }
+
+    @Test(dataProvider = "checkoutInformation", description = "TC-11: verifyCheckoutFormValidationMessagesForMissingFields")
     @Description("""
             Verifies that the system handles field validation on the checkout information page correctly:
             appropriate error messages appears when First Name, Last Name, or Postal Code are omitted.
@@ -65,7 +87,7 @@ public class CheckoutTest extends LoggedInBaseTest {
         softly.assertAll();
     }
 
-    @Test(description = "TC-11: verifyCartItemsPersistAfterRelogin")
+    @Test(description = "TC-12: verifyCartItemsPersistAfterRelogin")
     @Description("""
             Verifies shopping cart session persistence.
             Ensures that if a user adds items to their cart, logs out, and subsequently logs back in,

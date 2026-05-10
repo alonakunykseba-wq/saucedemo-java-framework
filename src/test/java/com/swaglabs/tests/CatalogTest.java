@@ -51,7 +51,7 @@ public class CatalogTest extends LoggedInBaseTest {
                 .isSortedAccordingTo(Comparator.reverseOrder());
     }
 
-    @Test (description = "TC-12: verifyProductDetailsMatchCatalogInformation")
+    @Test (description = "TC-13: verifyProductDetailsMatchCatalogInformation")
     @Description("""
             Verifies data synchronization between the high-level catalog and individual item pages.
             Ensures that when a specific product is clicked,

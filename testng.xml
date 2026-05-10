@@ -38,7 +38,7 @@
             </class>
         </classes>
     </test>
-    <test name="TC-12: verifyProductDetailsMatchCatalogInformation">
+    <test name="TC-13: verifyProductDetailsMatchCatalogInformation">
         <classes>
             <class name="com.swaglabs.tests.CatalogTest">
                 <methods>
@@ -74,7 +74,17 @@
             </class>
         </classes>
     </test>
-    <test name ="TC-10: verifyCheckoutFormValidationMessagesForMissingFields">
+    <test name ="TC-10: verifyCheckoutIsSuccessfullyFinished">
+        <classes>
+            <class name ="com.swaglabs.tests.CheckoutTest">
+                <methods>
+                    <include name ="verifyCheckoutIsSuccessfullyFinished"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name ="TC-11: verifyCheckoutFormValidationMessagesForMissingFields">
         <classes>
             <class name ="com.swaglabs.tests.CheckoutTest">
                 <methods>
@@ -83,7 +93,7 @@
             </class>
         </classes>
     </test>
-<test name ="TC-11: verifyCartItemsPersistAfterRelogin">
+<test name ="TC-12: verifyCartItemsPersistAfterRelogin">
 <classes>
     <class name ="com.swaglabs.tests.CheckoutTest">
         <methods>

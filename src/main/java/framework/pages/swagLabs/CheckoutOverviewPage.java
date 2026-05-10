@@ -9,6 +9,8 @@ public class CheckoutOverviewPage extends BasePage{
     private final By itemTotalSelector = By.cssSelector("div[data-test='subtotal-label']");
     private final By taxPriceSelector = By.cssSelector("div[data-test='tax-label']");
     private final By totalSelector = By.cssSelector("div[data-test='total-label']");
+    private final By finishButton = By.cssSelector("button[data-test='finish']");
+
 
     public CheckoutOverviewPage(WebDriver driver) {
         super(driver);
@@ -36,4 +38,10 @@ public class CheckoutOverviewPage extends BasePage{
     public double getTotalWithTax(){
         return Double.parseDouble(getText(totalSelector).replaceAll("[^0-9.]", ""));
     }
+
+    public CheckoutCompletePage  clickFinish(){
+        click(finishButton);
+        return new CheckoutCompletePage(driver);
+    }
+
 }
