@@ -2,7 +2,7 @@
     <listeners>
         <listener class-name="com.framework.core.TestListener" />
     </listeners>
-        <test name="TC-01: verifySuccessfulLoginRedirectsToInventory">
+        <test name="verifySuccessfulLoginRedirectsToInventory">
             <classes>
                 <class name="com.swaglabs.tests.LoginTest">
                     <methods>
@@ -11,37 +11,7 @@
                 </class>
             </classes>
         </test>
-    <test name="TC-02: verifyLockedOutUserDisplaysErrorMessage">
-        <parameter name="login" value="locked_out_user"/>
-        <parameter name="password" value="common_password"/>
-        <parameter name="expectedErrorMessage" value="Epic sadface: Sorry, this user has been locked out."/>
-
-        <classes>
-            <class name="com.swaglabs.tests.LoginTest">
-                <methods>
-                    <include name="verifyErrorMessageWhenLoginIsNotSuccessful"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-    <test name="TC-03: verifyInvalidCredentialsDisplayErrorMessage">
-        <parameter name="login" value="not_existing_user"/>
-        <parameter name="password" value="common_password"/>
-        <parameter name="expectedErrorMessage" value="Epic sadface: Username and password do not match any user in this service"/>
-
-        <classes>
-            <class name="com.swaglabs.tests.LoginTest">
-                <methods>
-                    <include name="verifyErrorMessageWhenLoginIsNotSuccessful"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-    <test name="TC-04: verifyMissingPasswordDisplaysRequiredErrorMessage">
-        <parameter name="login" value="standard_user"/>
-        <parameter name="password" value="empty_password"/>
-        <parameter name="expectedErrorMessage" value="Epic sadface: Password is required"/>
-
+    <test name="verifyErrorMessageWhenLoginIsNotSuccessful">
         <classes>
             <class name="com.swaglabs.tests.LoginTest">
                 <methods>
@@ -68,7 +38,7 @@
             </class>
         </classes>
     </test>
-    <test name="TC-12: verifyProductDetailsMatchCatalogInformation">
+    <test name="TC-13: verifyProductDetailsMatchCatalogInformation">
         <classes>
             <class name="com.swaglabs.tests.CatalogTest">
                 <methods>
@@ -97,12 +67,40 @@
     </test>
     <test name ="TC-09: verifyCheckoutTotalsAndTaxCalculationsAreAccurate">
         <classes>
-            <class name ="com.swaglabs.tests.ShoppingCartTest">
+            <class name ="com.swaglabs.tests.CheckoutTest">
                 <methods>
                     <include name ="verifyCheckoutTotalsAndTaxCalculationsAreAccurate"/>
                 </methods>
             </class>
         </classes>
     </test>
+    <test name ="TC-10: verifyCheckoutIsSuccessfullyFinished">
+        <classes>
+            <class name ="com.swaglabs.tests.CheckoutTest">
+                <methods>
+                    <include name ="verifyCheckoutIsSuccessfullyFinished"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name ="TC-11: verifyCheckoutFormValidationMessagesForMissingFields">
+        <classes>
+            <class name ="com.swaglabs.tests.CheckoutTest">
+                <methods>
+                    <include name ="verifyCheckoutFormValidationMessagesForMissingFields"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+<test name ="TC-12: verifyCartItemsPersistAfterRelogin">
+<classes>
+    <class name ="com.swaglabs.tests.CheckoutTest">
+        <methods>
+            <include name ="verifyCartItemsPersistAfterRelogin"/>
+        </methods>
+    </class>
+</classes>
+</test>
 </suite>
 

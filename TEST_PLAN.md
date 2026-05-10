@@ -51,22 +51,23 @@ This document outlines test scenarios designed to validate the functional integr
 * **Goal:** Verify the system calculates item totals and taxes accurately.
 * **Verification:** Assert that the sum of individual items matches the subtotal and the final total includes the correct tax amount.
 
+**TC-10: verifyCheckoutIsSuccessfullyFinished**
+* **Goal:** Verify the end-to-end "Happy Path" checkout flow.
+* **Verification:** Confirm that a user can successfully navigate through the entire checkout process, submit their order, and receive the "Thank you for your order!" success message.
 ---
 
 ### Category 4: Negative & Edge Case Testing
 
-**TC-10: verifyCheckoutFormValidationMessagesForMissingFields**
+**TC-11: verifyCheckoutFormValidationMessagesForMissingFields**
 * **Goal:** Verify field validation on the checkout information page.
 * **Verification:** Ensure appropriate error messages appear when First Name, Last Name, or Postal Code are omitted.
 
-**TC-11: verifyCartItemsPersistAfterRelogin**
+**TC-12: verifyCartItemsPersistAfterRelogin**
 * **Goal:** Validate cart state persistence.
 * **Verification:** Verify that cart contents survive a logout/login cycle.
 
-**TC-12: verifyProductDetailsMatchCatalogInformation**
+**TC-13: verifyProductDetailsMatchCatalogInformation**
 * **Goal:** Verify data synchronization between the catalog and product detail pages.
 * **Verification:** Assert that price and name remain consistent when navigating into a specific product's details.
 
-**TC-13: verifyCheckoutIsPreventedForEmptyCart**
-* **Goal:** Prevent invalid checkout attempts.
-* **Verification:** Confirm that the checkout process cannot be initiated if the cart contains no items.
+

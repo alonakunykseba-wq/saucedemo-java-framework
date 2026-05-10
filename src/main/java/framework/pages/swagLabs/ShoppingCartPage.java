@@ -7,7 +7,6 @@ import java.util.List;
 
 public class ShoppingCartPage extends BasePage{
 
-    private final By productPriceSelector = By.cssSelector(".inventory_item_price");
     private final By checkoutSelector = By.cssSelector("button[data-test='checkout']");
 
     public ShoppingCartPage(WebDriver driver) {
@@ -19,6 +18,10 @@ public class ShoppingCartPage extends BasePage{
         return rawPrices.stream()
                 .map(price -> Double.parseDouble(price.replace("$", "")))
                 .toList();
+    }
+
+    public List<String> getProductNames(){
+        return getTexts(productNameSelector);
     }
 
     public CheckoutInformationPage clickCheckoutButton(){
