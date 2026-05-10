@@ -18,7 +18,7 @@ public class LoginTest extends SwagLabsBase {
     }
 
 
-    @Test
+    @Test(groups = {"smoke"}, description = "TC-01: verifySuccessfulLoginRedirectsToInventory")
     @Description("""
     Verifies that a standard user with valid credentials can successfully log in and
     is automatically redirected to the main Products Inventory page.

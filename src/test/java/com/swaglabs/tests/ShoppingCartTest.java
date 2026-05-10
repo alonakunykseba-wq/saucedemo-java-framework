@@ -24,7 +24,7 @@ public class ShoppingCartTest extends LoggedInBaseTest {
                 .containsExactly(maxPrice);
     }
 
-    @Test(description = "TC-08: verifyCartBadgeUpdatesWhenProductIsAdded")
+    @Test(groups = {"smoke"}, description = "TC-08: verifyCartBadgeUpdatesWhenProductIsAdded")
     @Description("""
             Verifies that the system correctly updates the shopping cart badge with the number of added items in real time
             and toggles button name from "Add to cart" to "Remove".

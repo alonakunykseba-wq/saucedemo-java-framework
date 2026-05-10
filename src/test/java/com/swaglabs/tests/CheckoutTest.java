@@ -14,13 +14,17 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CheckoutTest extends LoggedInBaseTest {
+    private static final String TEST_FIRST_NAME = "Antuan";
+    private static final String TEST_LAST_NAME = "Muller";
+    private static final String TEST_ZIP = "12-456";
+
     public record CheckoutData(String firstName, String lastName, String postalCode, String errorMessage ){}
     @DataProvider(name = "checkoutInformation")
     public static Object[][] checkoutInformation() {
         return new Object[][]{
-                {new CheckoutData("", "Muller", "12456", "Error: First Name is required")},
-                {new CheckoutData("Antuan", "", "12345", "Error: Last Name is required")},
-                {new CheckoutData ("Antuan", "Muller", "", "Error: Postal Code is required")}
+                {new CheckoutData("", TEST_LAST_NAME, TEST_ZIP, "Error: First Name is required")},
+                {new CheckoutData(TEST_FIRST_NAME, "", TEST_ZIP, "Error: Last Name is required")},
+                {new CheckoutData (TEST_FIRST_NAME, TEST_LAST_NAME, "", "Error: Postal Code is required")}
         };
     }
 
@@ -37,7 +41,7 @@ public class CheckoutTest extends LoggedInBaseTest {
     public void verifyCheckoutTotalsAndTaxCalculationsAreAccurate() {
         int amount = 3;
         CheckoutInformationPage buyerInformation = navigateToCheckoutForm(amount);
-        buyerInformation.fillTheForm("Antuan", "Muller","12-456");
+        buyerInformation.fillTheForm(TEST_FIRST_NAME, TEST_LAST_NAME, TEST_ZIP);
         CheckoutOverviewPage checkoutOverview = buyerInformation.clickContinueButton();
         List<Double> prices = checkoutOverview.getProductPrices();
         softly.assertThat(checkoutOverview.getItemTotalPrice())
@@ -49,7 +53,7 @@ public class CheckoutTest extends LoggedInBaseTest {
         softly.assertAll();
     }
 
-    @Test(description = "TC-10: verifyCheckoutIsSuccessfullyFinished")
+    @Test(groups = {"smoke", "e2e"},description = "TC-10: verifyCheckoutIsSuccessfullyFinished")
     @Description("""  
             Verifies the end-to-end Happy Path purchase flow.
             Ensures that a user can successfully add an item to the cart, provide valid checkout information, 
@@ -58,7 +62,7 @@ public class CheckoutTest extends LoggedInBaseTest {
     public void verifyCheckoutIsSuccessfullyFinished(){
         int amount = 3;
         CheckoutInformationPage buyerInformation = navigateToCheckoutForm(amount);
-        buyerInformation.fillTheForm("Antuan", "Muller","12-456");
+        buyerInformation.fillTheForm(TEST_FIRST_NAME, TEST_LAST_NAME, TEST_ZIP);
         CheckoutOverviewPage checkoutOverview = buyerInformation.clickContinueButton();
         CheckoutCompletePage checkoutComplete = checkoutOverview.clickFinish();
         softly.assertThat(checkoutComplete.getCompleteOrderHeader())
