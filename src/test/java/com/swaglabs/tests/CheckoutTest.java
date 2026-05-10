@@ -56,7 +56,7 @@ public class CheckoutTest extends LoggedInBaseTest {
     @Test(groups = {"smoke", "e2e"},description = "TC-10: verifyCheckoutIsSuccessfullyFinished")
     @Description("""  
             Verifies the end-to-end Happy Path purchase flow.
-            Ensures that a user can successfully add an item to the cart, provide valid checkout information, 
+            Ensures that a user can successfully add an item to the cart, provide valid checkout information,
             submit the final order, and receive the correct order confirmation message.
     """)
     public void verifyCheckoutIsSuccessfullyFinished(){
