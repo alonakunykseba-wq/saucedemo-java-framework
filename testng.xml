@@ -83,5 +83,14 @@
             </class>
         </classes>
     </test>
+<test name ="TC-11: verifyCartItemsPersistAfterRelogin">
+<classes>
+    <class name ="com.swaglabs.tests.CheckoutTest">
+        <methods>
+            <include name ="verifyCartItemsPersistAfterRelogin"/>
+        </methods>
+    </class>
+</classes>
+</test>
 </suite>
 

@@ -13,7 +13,9 @@ import java.util.List;
 public class BasePage {
     protected WebDriver driver;
     protected WebDriverWait wait;
-    private final By productPriceSelector = By.cssSelector(".inventory_item_price");
+    protected final By productPriceSelector = By.cssSelector(".inventory_item_price");
+    protected final By productNameSelector = By.cssSelector(".inventory_item_name");
+
 
     public BasePage(WebDriver driver) {
         this.driver = driver;

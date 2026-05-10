@@ -14,13 +14,13 @@ import java.util.Random;
 public class ProductsOverviewPage extends BasePage {
 
     private final By title = By.cssSelector(".title");
-    private final By productNameSelector = By.cssSelector(".inventory_item_name");
-
     private final By sortingDropdownSelector = By.className("product_sort_container");
     private final By shoppingCartSelector = By.cssSelector("a[data-test='shopping-cart-link']");
     private final By shoppingCartBadgeSelector = By.cssSelector(".shopping_cart_badge");
     private final By removeButtonSelector = By.xpath("//button[contains(text(), 'Remove')]");
     private final By addButtonSelector = By.xpath("//button[contains(text(), 'Add to cart')]");
+    private final By logoutButtonSelector = By.xpath("//a[contains(text(), 'Logout')]");
+    private final By burgerButtonSelector = By.xpath("//button[contains(text(), 'Open Menu')]");
 
     public ProductsOverviewPage(WebDriver driver) {
         super(driver);
@@ -92,5 +92,10 @@ public class ProductsOverviewPage extends BasePage {
     public ShoppingCartPage clickShoppingCart() {
         click(shoppingCartSelector);
         return new ShoppingCartPage(driver);
+    }
+
+    public void logout(){
+        click(burgerButtonSelector);
+        click(logoutButtonSelector);
     }
 }

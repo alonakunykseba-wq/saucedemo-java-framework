@@ -10,6 +10,8 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class CheckoutTest extends LoggedInBaseTest {
     public record CheckoutData(String firstName, String lastName, String postalCode, String errorMessage ){}
     @DataProvider(name = "checkoutInformation")
@@ -61,5 +63,23 @@ public class CheckoutTest extends LoggedInBaseTest {
                 .withFailMessage("Error message is not as expected")
                 .isEqualTo(data.errorMessage);
         softly.assertAll();
+    }
+
+    @Test(description = "TC-11: verifyCartItemsPersistAfterRelogin")
+    @Description("""
+            Verifies shopping cart session persistence.
+            Ensures that if a user adds items to their cart, logs out, and subsequently logs back in,
+            the system successfully retains the state of the cart and restores all previously added items.
+            """)
+
+    public void verifyCartItemsPersistAfterRelogin(){
+        productsOverviewPage.addProductsToTheCart(2);
+        List <String> expectedProductList = productsOverviewPage.clickShoppingCart().getProductNames();
+        productsOverviewPage.logout();
+        loginAsStandardUser();
+        List <String> actualProductList = productsOverviewPage.clickShoppingCart().getProductNames();
+        assertThat(actualProductList)
+                .withFailMessage("The list of products in the shopping cart is not as expected one")
+                .containsExactlyInAnyOrderElementsOf(expectedProductList);
     }
 }
