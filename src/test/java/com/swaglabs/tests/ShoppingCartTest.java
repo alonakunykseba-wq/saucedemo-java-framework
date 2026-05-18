@@ -17,8 +17,9 @@ public class ShoppingCartTest extends LoggedInBaseTest {
             """)
     public void verifyHighestPriceItemCanBeAddedToCart() {
         double maxPrice = Collections.max(productsOverviewPage.getProductPrices());
-        productsOverviewPage.addProductToTheCartByPrice(maxPrice);
-        ShoppingCartPage shoppingCart = productsOverviewPage.clickShoppingCart();
+        ShoppingCartPage shoppingCart = productsOverviewPage
+                .addProductToTheCartByPrice(maxPrice)
+                .navigateToTheCart();
         assertThat(shoppingCart.getProductPrices())
                 .withFailMessage("The product price is not as expected")
                 .containsExactly(maxPrice);
@@ -41,7 +42,7 @@ public class ShoppingCartTest extends LoggedInBaseTest {
         softly.assertThat(productsOverviewPage.areRemoveButtonsDisplayed())
                 .withFailMessage("The remove button is not found")
                 .isTrue();
-        productsOverviewPage.clickRemoveButton();
+        productsOverviewPage.remove();
         softly.assertThat(productsOverviewPage.getProductsAmountInTheCart())
                 .withFailMessage("The products amount in the shopping cart is not updated correctly")
                 .isEqualTo(amount - 1);

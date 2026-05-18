@@ -43,7 +43,7 @@ public class ProductsOverviewPage extends BasePage {
     public ProductDetailsPage clickRandomProductLink(String randomProduct) {
         String randomProductSelector = String.format("//div[@data-test='inventory-item-name' and text()='%s']", randomProduct);
         click(By.xpath(randomProductSelector));
-        return new ProductDetailsPage(driver);
+        return new ProductDetailsPage(driver).waitForPageLoad();
     }
 
     public double getProductPriceByName(String productName) {
@@ -60,23 +60,25 @@ public class ProductsOverviewPage extends BasePage {
         dropdown.selectByVisibleText(sortingMethodName);
     }
 
-    public void addProductToTheCartByPrice(double price) {
+    public ProductsOverviewPage addProductToTheCartByPrice(double price) {
         By addToCartLocator = By.xpath(
                 String.format(Locale.US, "//div[@class='inventory_item_price' and contains(.,'$%.2f')]/following-sibling::button", price));
         click(addToCartLocator);
+        return this;
     }
 
-    public void addProductsToTheCart(int amount) {
+    public ProductsOverviewPage addProductsToTheCart(int amount) {
         for (int x = 0; x < amount; x++) {
            click(addButtonSelector);
         }
+        return this;
     }
 
     public boolean areRemoveButtonsDisplayed() {
         return !driver.findElements(removeButtonSelector).isEmpty();
     }
 
-    public void clickRemoveButton(){
+    public void remove(){
         click(removeButtonSelector);
     }
 
@@ -89,9 +91,9 @@ public class ProductsOverviewPage extends BasePage {
         return Integer.parseInt(getText(shoppingCartBadgeSelector));
     }
 
-    public ShoppingCartPage clickShoppingCart() {
+    public ShoppingCartPage navigateToTheCart() {
         click(shoppingCartSelector);
-        return new ShoppingCartPage(driver);
+        return new ShoppingCartPage(driver).waitForPageLoad();
     }
 
     public void logout(){

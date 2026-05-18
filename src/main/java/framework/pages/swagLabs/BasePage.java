@@ -1,6 +1,7 @@
 package framework.pages.swagLabs;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -15,7 +16,7 @@ public class BasePage {
     protected WebDriverWait wait;
     protected final By productPriceSelector = By.cssSelector(".inventory_item_price");
     protected final By productNameSelector = By.cssSelector(".inventory_item_name");
-
+    protected final By contentsWrapperSelector = By.id("contents_wrapper");
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
@@ -54,5 +55,13 @@ public class BasePage {
         return getProductPricesWithCurrency().stream()
                 .map(price -> Double.parseDouble(price.replace("$", "")))
                 .toList();
+    }
+
+    @SuppressWarnings("unchecked")
+    public <T extends BasePage> T waitForPageLoad() {
+        wait.until(driver -> ((JavascriptExecutor) driver)
+                .executeScript("return document.readyState").equals("complete"));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(contentsWrapperSelector));
+        return (T) this;
     }
 }

@@ -14,18 +14,19 @@ public class CheckoutInformationPage extends BasePage{
         super(driver);
     }
 
-    public void fillTheForm(String firstName,String lastName, String postalCode){
+    public CheckoutInformationPage fillTheForm(String firstName,String lastName, String postalCode){
         enterText(firstNameFieldSelector, firstName);
         enterText(lastNameFieldSelector, lastName);
         enterText(postalCodeSelector, postalCode);
+        return this;
     }
 
-    public CheckoutOverviewPage clickContinueButton(){
+    public CheckoutOverviewPage proceed(){
         click(continueButtonSelector);
-        return new CheckoutOverviewPage(driver);
+        return new CheckoutOverviewPage(driver).waitForPageLoad();
     }
 
-    public String getError(){
+    public String getErrorText(){
         return getText(errorSelector);
     }
 }
