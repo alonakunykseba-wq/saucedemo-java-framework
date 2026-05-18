@@ -17,7 +17,7 @@ public class SwagLabsBase extends BaseTest {
     }
     // A common method to handle the repetitive login steps
     public void loginAsStandardUser() {
-        productsOverviewPage = loginPage.logInToTheAccount(
+        productsOverviewPage = loginPage.logInSuccessfully(
                 getProperty("standard_user"),
                 getProperty("common_password")
         );

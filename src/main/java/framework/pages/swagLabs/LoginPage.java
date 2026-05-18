@@ -14,11 +14,18 @@ public class LoginPage extends BasePage {
     private final By loginButton = By.cssSelector("#login-button");
     private final By errorMessage = By.cssSelector("[data-test=\"error\"]");
 
-    public ProductsOverviewPage logInToTheAccount(String username, String password) {
+    public ProductsOverviewPage logInSuccessfully(String username, String password) {
         enterText(usernameField, username);
         enterText(passwordField, password);
         click(loginButton);
-        return new ProductsOverviewPage(driver);
+        return new ProductsOverviewPage(driver).waitForPageLoad();
+    }
+
+    public void loginUnsuccessfully(String username, String password) {
+        enterText(usernameField, username);
+        enterText(passwordField, password);
+        click(loginButton);
+
     }
 
     public String getErrorText() {

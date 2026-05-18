@@ -30,7 +30,7 @@ public class CheckoutTest extends LoggedInBaseTest {
 
     private CheckoutInformationPage navigateToCheckoutForm(int amount) {
         productsOverviewPage.addProductsToTheCart(amount);
-        return productsOverviewPage.clickShoppingCart().clickCheckoutButton();
+        return productsOverviewPage.navigateToTheCart().checkout();
     }
 
     @Test(description = "TC-09: verifyCheckoutTotalsAndTaxCalculationsAreAccurate")
@@ -64,7 +64,7 @@ public class CheckoutTest extends LoggedInBaseTest {
         CheckoutInformationPage buyerInformation = navigateToCheckoutForm(amount);
         buyerInformation.fillTheForm(TEST_FIRST_NAME, TEST_LAST_NAME, TEST_ZIP);
         CheckoutOverviewPage checkoutOverview = buyerInformation.clickContinueButton();
-        CheckoutCompletePage checkoutComplete = checkoutOverview.clickFinish();
+        CheckoutCompletePage checkoutComplete = checkoutOverview.finish();
         softly.assertThat(checkoutComplete.getCompleteOrderHeader())
                 .withFailMessage("The complete order header is not as expected")
                 .isEqualTo("Thank you for your order!");
@@ -85,7 +85,7 @@ public class CheckoutTest extends LoggedInBaseTest {
         CheckoutInformationPage buyerInformation = navigateToCheckoutForm(amount);
         buyerInformation.fillTheForm(data.firstName, data.lastName, data.postalCode);
         buyerInformation.clickContinueButton();
-        softly.assertThat(buyerInformation.getError())
+        softly.assertThat(buyerInformation.getErrorText())
                 .withFailMessage("Error message is not as expected")
                 .isEqualTo(data.errorMessage);
         softly.assertAll();
@@ -100,10 +100,10 @@ public class CheckoutTest extends LoggedInBaseTest {
 
     public void verifyCartItemsPersistAfterRelogin(){
         productsOverviewPage.addProductsToTheCart(2);
-        List <String> expectedProductList = productsOverviewPage.clickShoppingCart().getProductNames();
+        List <String> expectedProductList = productsOverviewPage.navigateToTheCart().getProductNames();
         productsOverviewPage.logout();
         loginAsStandardUser();
-        List <String> actualProductList = productsOverviewPage.clickShoppingCart().getProductNames();
+        List <String> actualProductList = productsOverviewPage.navigateToTheCart().getProductNames();
         assertThat(actualProductList)
                 .withFailMessage("The list of products in the shopping cart is not as expected one")
                 .containsExactlyInAnyOrderElementsOf(expectedProductList);

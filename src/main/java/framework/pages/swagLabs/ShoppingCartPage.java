@@ -24,9 +24,9 @@ public class ShoppingCartPage extends BasePage{
         return getTexts(productNameSelector);
     }
 
-    public CheckoutInformationPage clickCheckoutButton(){
+    public CheckoutInformationPage checkout(){
         click(checkoutSelector);
-        return new CheckoutInformationPage(driver);
+        return new CheckoutInformationPage(driver).waitForPageLoad();
     }
 }
 

@@ -39,9 +39,9 @@ public class CheckoutOverviewPage extends BasePage{
         return Double.parseDouble(getText(totalSelector).replaceAll("[^0-9.]", ""));
     }
 
-    public CheckoutCompletePage  clickFinish(){
+    public CheckoutCompletePage finish(){
         click(finishButton);
-        return new CheckoutCompletePage(driver);
+        return new CheckoutCompletePage(driver).waitForPageLoad();
     }
 
 }

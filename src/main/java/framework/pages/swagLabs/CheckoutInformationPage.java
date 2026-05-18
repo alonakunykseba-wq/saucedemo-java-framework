@@ -22,10 +22,10 @@ public class CheckoutInformationPage extends BasePage{
 
     public CheckoutOverviewPage clickContinueButton(){
         click(continueButtonSelector);
-        return new CheckoutOverviewPage(driver);
+        return new CheckoutOverviewPage(driver).waitForPageLoad();
     }
 
-    public String getError(){
+    public String getErrorText(){
         return getText(errorSelector);
     }
 }

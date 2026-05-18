@@ -38,7 +38,7 @@ public class LoginTest extends SwagLabsBase {
             and correctly displays the expected error message without granting system access.
             """)
     public void verifyErrorMessageWhenLoginIsNotSuccessful(String login, String password, String expectedErrorMessage) {
-        loginPage.logInToTheAccount(
+        loginPage.loginUnsuccessfully(
                 getProperty(login),
                 getProperty(password)
         );

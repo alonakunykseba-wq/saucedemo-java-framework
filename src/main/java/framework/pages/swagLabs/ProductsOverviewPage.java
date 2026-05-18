@@ -43,7 +43,7 @@ public class ProductsOverviewPage extends BasePage {
     public ProductDetailsPage clickRandomProductLink(String randomProduct) {
         String randomProductSelector = String.format("//div[@data-test='inventory-item-name' and text()='%s']", randomProduct);
         click(By.xpath(randomProductSelector));
-        return new ProductDetailsPage(driver);
+        return new ProductDetailsPage(driver).waitForPageLoad();
     }
 
     public double getProductPriceByName(String productName) {
@@ -76,7 +76,7 @@ public class ProductsOverviewPage extends BasePage {
         return !driver.findElements(removeButtonSelector).isEmpty();
     }
 
-    public void clickRemoveButton(){
+    public void remove(){
         click(removeButtonSelector);
     }
 
@@ -89,9 +89,9 @@ public class ProductsOverviewPage extends BasePage {
         return Integer.parseInt(getText(shoppingCartBadgeSelector));
     }
 
-    public ShoppingCartPage clickShoppingCart() {
+    public ShoppingCartPage navigateToTheCart() {
         click(shoppingCartSelector);
-        return new ShoppingCartPage(driver);
+        return new ShoppingCartPage(driver).waitForPageLoad();
     }
 
     public void logout(){
