@@ -17,8 +17,9 @@ public class ShoppingCartTest extends LoggedInBaseTest {
             """)
     public void verifyHighestPriceItemCanBeAddedToCart() {
         double maxPrice = Collections.max(productsOverviewPage.getProductPrices());
-        productsOverviewPage.addProductToTheCartByPrice(maxPrice);
-        ShoppingCartPage shoppingCart = productsOverviewPage.navigateToTheCart();
+        ShoppingCartPage shoppingCart = productsOverviewPage
+                .addProductToTheCartByPrice(maxPrice)
+                .navigateToTheCart();
         assertThat(shoppingCart.getProductPrices())
                 .withFailMessage("The product price is not as expected")
                 .containsExactly(maxPrice);

@@ -60,16 +60,18 @@ public class ProductsOverviewPage extends BasePage {
         dropdown.selectByVisibleText(sortingMethodName);
     }
 
-    public void addProductToTheCartByPrice(double price) {
+    public ProductsOverviewPage addProductToTheCartByPrice(double price) {
         By addToCartLocator = By.xpath(
                 String.format(Locale.US, "//div[@class='inventory_item_price' and contains(.,'$%.2f')]/following-sibling::button", price));
         click(addToCartLocator);
+        return this;
     }
 
-    public void addProductsToTheCart(int amount) {
+    public ProductsOverviewPage addProductsToTheCart(int amount) {
         for (int x = 0; x < amount; x++) {
            click(addButtonSelector);
         }
+        return this;
     }
 
     public boolean areRemoveButtonsDisplayed() {

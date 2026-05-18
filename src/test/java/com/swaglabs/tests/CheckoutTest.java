@@ -29,8 +29,10 @@ public class CheckoutTest extends LoggedInBaseTest {
     }
 
     private CheckoutInformationPage navigateToCheckoutForm(int amount) {
-        productsOverviewPage.addProductsToTheCart(amount);
-        return productsOverviewPage.navigateToTheCart().checkout();
+        return productsOverviewPage
+                .addProductsToTheCart(amount)
+                .navigateToTheCart()
+                .checkout();
     }
 
     @Test(description = "TC-09: verifyCheckoutTotalsAndTaxCalculationsAreAccurate")
@@ -40,9 +42,9 @@ public class CheckoutTest extends LoggedInBaseTest {
             """)
     public void verifyCheckoutTotalsAndTaxCalculationsAreAccurate() {
         int amount = 3;
-        CheckoutInformationPage buyerInformation = navigateToCheckoutForm(amount);
-        buyerInformation.fillTheForm(TEST_FIRST_NAME, TEST_LAST_NAME, TEST_ZIP);
-        CheckoutOverviewPage checkoutOverview = buyerInformation.clickContinueButton();
+        CheckoutOverviewPage checkoutOverview = navigateToCheckoutForm(amount)
+                .fillTheForm(TEST_FIRST_NAME, TEST_LAST_NAME, TEST_ZIP)
+                .proceed();
         List<Double> prices = checkoutOverview.getProductPrices();
         softly.assertThat(checkoutOverview.getItemTotalPrice())
                 .withFailMessage("The item total differs from sum of product prices without tax")
@@ -61,10 +63,10 @@ public class CheckoutTest extends LoggedInBaseTest {
     """)
     public void verifyCheckoutIsSuccessfullyFinished(){
         int amount = 3;
-        CheckoutInformationPage buyerInformation = navigateToCheckoutForm(amount);
-        buyerInformation.fillTheForm(TEST_FIRST_NAME, TEST_LAST_NAME, TEST_ZIP);
-        CheckoutOverviewPage checkoutOverview = buyerInformation.clickContinueButton();
-        CheckoutCompletePage checkoutComplete = checkoutOverview.finish();
+        CheckoutCompletePage checkoutComplete = navigateToCheckoutForm(amount)
+                .fillTheForm(TEST_FIRST_NAME, TEST_LAST_NAME, TEST_ZIP)
+                .proceed()
+                .finish();
         softly.assertThat(checkoutComplete.getCompleteOrderHeader())
                 .withFailMessage("The complete order header is not as expected")
                 .isEqualTo("Thank you for your order!");
@@ -82,9 +84,9 @@ public class CheckoutTest extends LoggedInBaseTest {
 
     public void verifyCheckoutFormValidationMessagesForMissingFields(CheckoutData data) {
         int amount = 1;
-        CheckoutInformationPage buyerInformation = navigateToCheckoutForm(amount);
-        buyerInformation.fillTheForm(data.firstName, data.lastName, data.postalCode);
-        buyerInformation.clickContinueButton();
+        CheckoutInformationPage buyerInformation = navigateToCheckoutForm(amount)
+                .fillTheForm(data.firstName, data.lastName, data.postalCode);
+        buyerInformation.proceed();
         softly.assertThat(buyerInformation.getErrorText())
                 .withFailMessage("Error message is not as expected")
                 .isEqualTo(data.errorMessage);
