@@ -21,11 +21,11 @@ public class LoginPage extends BasePage {
         return new ProductsOverviewPage(driver).waitForPageLoad();
     }
 
-    public void loginUnsuccessfully(String username, String password) {
+    public LoginPage loginUnsuccessfully(String username, String password) {
         enterText(usernameField, username);
         enterText(passwordField, password);
         click(loginButton);
-
+        return this;
     }
 
     public String getErrorText() {

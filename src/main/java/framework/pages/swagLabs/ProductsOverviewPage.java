@@ -54,10 +54,11 @@ public class ProductsOverviewPage extends BasePage {
         return Double.parseDouble(getText(By.xpath(priceLocator)).replace("$", ""));
     }
 
-    public void applySortingFilter(String sortingMethodName) {
+    public ProductsOverviewPage applySortingFilter(String sortingMethodName) {
         WebElement sortingDropdownElement = wait.until(ExpectedConditions.visibilityOfElementLocated(sortingDropdownSelector));
         Select dropdown = new Select(sortingDropdownElement);
         dropdown.selectByVisibleText(sortingMethodName);
+        return this;
     }
 
     public ProductsOverviewPage addProductToTheCartByPrice(double price) {
@@ -78,8 +79,9 @@ public class ProductsOverviewPage extends BasePage {
         return !driver.findElements(removeButtonSelector).isEmpty();
     }
 
-    public void remove(){
+    public ProductsOverviewPage remove(){
         click(removeButtonSelector);
+        return this;
     }
 
     public boolean isShoppingCartBadgeDisplayed() {
@@ -96,8 +98,9 @@ public class ProductsOverviewPage extends BasePage {
         return new ShoppingCartPage(driver).waitForPageLoad();
     }
 
-    public void logout(){
+    public LoginPage logout(){
         click(burgerButtonSelector);
         click(logoutButtonSelector);
+        return new LoginPage(driver);
     }
 }

@@ -13,8 +13,6 @@ public class ProductDetailsPage extends BasePage {
     private final By productNameLocator = By.cssSelector("[data-test='inventory-item-name']");
     private final By productPriceLocator = By.cssSelector("[data-test='inventory-item-price']");
 
-
-
     public String getProductName() {
         return getText(productNameLocator);
     }
