@@ -1,14 +1,25 @@
-<suite name="SwagLabs Automation Suite">
+<suite name="SwagLabs Automation Suite" parallel="tests" thread-count="2">
     <listeners>
-        <listener class-name="com.framework.core.TestListener" />
+        <listener class-name="tests.listeners.TestListener" />
     </listeners>
     
-    <test name="SwagLabs Full Regression Suite">
+    <test name="Firefox Regression Suite">
+        <parameter name="browser" value="firefox"/>
         <classes>
-            <class name="com.swaglabs.tests.LoginTest" />
-            <class name="com.swaglabs.tests.CatalogTest" />
-            <class name="com.swaglabs.tests.ShoppingCartTest" />
-            <class name="com.swaglabs.tests.CheckoutTest" />
+            <class name="tests.LoginTest" />
+            <class name="tests.CatalogTest" />
+            <class name="tests.ShoppingCartTest" />
+            <class name="tests.CheckoutTest" />
+        </classes>
+    </test>
+
+    <test name="Chrome Regression Suite">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="tests.LoginTest" />
+            <class name="tests.CatalogTest" />
+            <class name="tests.ShoppingCartTest" />
+            <class name="tests.CheckoutTest" />
         </classes>
     </test>
 </suite>

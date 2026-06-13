@@ -1,9 +1,9 @@
-package com.swaglabs.tests;
+package tests;
 
-import com.swaglabs.base.LoggedInBaseTest;
-import framework.pages.swagLabs.CheckoutCompletePage;
-import framework.pages.swagLabs.CheckoutInformationPage;
-import framework.pages.swagLabs.CheckoutOverviewPage;
+import tests.base.LoggedInBaseTest;
+import pages.CheckoutCompletePage;
+import pages.CheckoutInformationPage;
+import pages.CheckoutOverviewPage;
 import io.qameta.allure.Description;
 import org.assertj.core.data.Offset;
 import org.testng.annotations.DataProvider;

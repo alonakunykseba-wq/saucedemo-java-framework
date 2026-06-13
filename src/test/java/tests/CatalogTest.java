@@ -1,7 +1,7 @@
-package com.swaglabs.tests;
+package tests;
 
-import com.swaglabs.base.LoggedInBaseTest;
-import framework.pages.swagLabs.ProductDetailsPage;
+import tests.base.LoggedInBaseTest;
+import pages.ProductDetailsPage;
 import io.qameta.allure.Description;
 import org.testng.annotations.Test;
 

@@ -1,7 +1,7 @@
-package com.swaglabs.tests;
+package tests;
 
-import com.swaglabs.base.LoggedInBaseTest;
-import framework.pages.swagLabs.ShoppingCartPage;
+import tests.base.LoggedInBaseTest;
+import pages.ShoppingCartPage;
 import io.qameta.allure.Description;
 import org.testng.annotations.Test;
 import java.util.Collections;
