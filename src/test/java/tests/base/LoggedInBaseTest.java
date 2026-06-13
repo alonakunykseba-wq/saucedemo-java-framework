@@ -3,7 +3,6 @@ package tests.base;
 import org.assertj.core.api.SoftAssertions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import pages.ProductsOverviewPage;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
