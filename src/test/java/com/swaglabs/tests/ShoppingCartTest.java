@@ -10,12 +10,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ShoppingCartTest extends LoggedInBaseTest {
 
-    @Test(description = "TC-07: verifyHighestPriceItemCanBeAddedToCart")
+    @Test(description = "TC-07: shouldSuccessfullyAddToCart_whenHighestPricedItemIsSelected")
     @Description("""
             Verifies that the system correctly identifies the highest-priced item in the catalog,
             successfully adds it to the shopping cart, and ensures the exact price is accurately reflected inside the cart.
             """)
-    public void verifyHighestPriceItemCanBeAddedToCart() {
+    public void shouldSuccessfullyAddToCart_whenHighestPricedItemIsSelected() {
         double maxPrice = Collections.max(productsOverviewPage.getProductPrices());
         ShoppingCartPage shoppingCart = productsOverviewPage
                 .addProductToTheCartByPrice(maxPrice)
@@ -25,12 +25,12 @@ public class ShoppingCartTest extends LoggedInBaseTest {
                 .containsExactly(maxPrice);
     }
 
-    @Test(groups = {"smoke"}, description = "TC-08: verifyCartBadgeUpdatesWhenProductIsAdded")
+    @Test(groups = {"smoke"}, description = "TC-08: shouldUpdateCartBadgeAndToggleButton_whenProductIsAdded")
     @Description("""
             Verifies that the system correctly updates the shopping cart badge with the number of added items in real time
             and toggles button name from "Add to cart" to "Remove".
             """)
-    public void verifyCartBadgeUpdatesWhenProductIsAdded() {
+    public void shouldUpdateCartBadgeAndToggleButton_whenProductIsAdded() {
         int amount = 3;
         softly.assertThat(productsOverviewPage.isShoppingCartBadgeDisplayed())
                 .withFailMessage("The shopping cart is not empty")

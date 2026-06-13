@@ -2,105 +2,13 @@
     <listeners>
         <listener class-name="com.framework.core.TestListener" />
     </listeners>
-        <test name="verifySuccessfulLoginRedirectsToInventory">
-            <classes>
-                <class name="com.swaglabs.tests.LoginTest">
-                    <methods>
-                        <include name="verifySuccessfulLoginRedirectsToInventory"/>
-                    </methods>
-                </class>
-            </classes>
-        </test>
-    <test name="verifyErrorMessageWhenLoginIsNotSuccessful">
+    
+    <test name="SwagLabs Full Regression Suite">
         <classes>
-            <class name="com.swaglabs.tests.LoginTest">
-                <methods>
-                    <include name="verifyErrorMessageWhenLoginIsNotSuccessful"/>
-                </methods>
-            </class>
+            <class name="com.swaglabs.tests.LoginTest" />
+            <class name="com.swaglabs.tests.CatalogTest" />
+            <class name="com.swaglabs.tests.ShoppingCartTest" />
+            <class name="com.swaglabs.tests.CheckoutTest" />
         </classes>
     </test>
-    <test name="TC-05: verifyProductCatalogCountAndBrandingConsistency">
-        <classes>
-            <class name="com.swaglabs.tests.CatalogTest">
-                <methods>
-                    <include name="verifyProductCatalogCountAndBrandingConsistency"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-    <test name="TC-06: verifyHighToLowPriceSortingLogic">
-        <classes>
-            <class name="com.swaglabs.tests.CatalogTest">
-                <methods>
-                    <include name="verifyHighToLowPriceSortingLogic"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-    <test name="TC-13: verifyProductDetailsMatchCatalogInformation">
-        <classes>
-            <class name="com.swaglabs.tests.CatalogTest">
-                <methods>
-                    <include name="verifyProductDetailsMatchCatalogInformation"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-    <test name="TC-07: verifyHighestPriceItemCanBeAddedToCart">
-        <classes>
-            <class name="com.swaglabs.tests.ShoppingCartTest">
-                <methods>
-                    <include name="verifyHighestPriceItemCanBeAddedToCart"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-    <test name ="TC-08: verifyCartBadgeUpdatesWhenProductIsAdded">
-        <classes>
-            <class name ="com.swaglabs.tests.ShoppingCartTest">
-                <methods>
-                    <include name ="verifyCartBadgeUpdatesWhenProductIsAdded"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-    <test name ="TC-09: verifyCheckoutTotalsAndTaxCalculationsAreAccurate">
-        <classes>
-            <class name ="com.swaglabs.tests.CheckoutTest">
-                <methods>
-                    <include name ="verifyCheckoutTotalsAndTaxCalculationsAreAccurate"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-    <test name ="TC-10: verifyCheckoutIsSuccessfullyFinished">
-        <classes>
-            <class name ="com.swaglabs.tests.CheckoutTest">
-                <methods>
-                    <include name ="verifyCheckoutIsSuccessfullyFinished"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-
-    <test name ="TC-11: verifyCheckoutFormValidationMessagesForMissingFields">
-        <classes>
-            <class name ="com.swaglabs.tests.CheckoutTest">
-                <methods>
-                    <include name ="verifyCheckoutFormValidationMessagesForMissingFields"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-<test name ="TC-12: verifyCartItemsPersistAfterRelogin">
-<classes>
-    <class name ="com.swaglabs.tests.CheckoutTest">
-        <methods>
-            <include name ="verifyCartItemsPersistAfterRelogin"/>
-        </methods>
-    </class>
-</classes>
-</test>
 </suite>
-

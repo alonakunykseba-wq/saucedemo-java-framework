@@ -18,26 +18,26 @@ public class LoginTest extends SwagLabsBase {
     }
 
 
-    @Test(groups = {"smoke"}, description = "TC-01: verifySuccessfulLoginRedirectsToInventory")
+    @Test(groups = {"smoke"}, description = "TC-01: shouldRedirectToInventory_whenLoginIsSuccessful")
     @Description("""
     Verifies that a standard user with valid credentials can successfully log in and
     is automatically redirected to the main Products Inventory page.
     """)
-    public void verifySuccessfulLoginRedirectsToInventory(){
+    public void shouldRedirectToInventory_whenLoginIsSuccessful(){
         loginAsStandardUser();
         assertThat(getProductsOverviewPage().getPageTitle())
                 .withFailMessage("Page title is not as expected")
                 .isEqualTo("Products");
     }
 
-    @Test(dataProvider = "invalidLoginData", description = "Verify Login Error Messages")
+    @Test(dataProvider = "invalidLoginData", description = "TC-02: shouldDisplayErrorMessage_whenCredentialsAreInvalid")
     @Description("""
             Data-driven negative test suite.
             Verifies that the system securely intercepts invalid login attempts
             (including locked-out accounts, bad credentials, and empty fields)
             and correctly displays the expected error message without granting system access.
             """)
-    public void verifyErrorMessageWhenLoginIsNotSuccessful(String login, String password, String expectedErrorMessage) {
+    public void shouldDisplayErrorMessage_whenCredentialsAreInvalid(String login, String password, String expectedErrorMessage) {
         loginPage.loginUnsuccessfully(
                 getProperty(login),
                 getProperty(password)
