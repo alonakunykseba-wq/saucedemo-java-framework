@@ -19,16 +19,16 @@ This project tests the End-to-End (E2E) E-commerce flows of the SauceDemo web ap
 This project implements a highly scalable architecture designed for enterprise‑level testing:
 
 * **Strict Page Object Model (POM):** 
-  * Centralized `BasePage.java` handles all core WebDriver waits and actions.
-  * Complete encapsulation of UI elements (`WebElements` and `By` locators are never exposed to test classes).
+  * Centralized "BasePage.java" handles all core WebDriver waits and actions.
+  * Complete encapsulation of UI elements "WebElements" and "By" locators are never exposed to test classes).
 * **Data-Driven Testing (DDT):**
-  * Utilizes TestNG `@DataProvider` matrices paired with modern **Java Records** to cleanly pass complex data objects, avoiding the "Long Parameter List" code smell.
+  * Utilizes TestNG "@DataProvider" matrices paired with modern **Java Records** to cleanly pass complex data objects, avoiding the "Long Parameter List" code smell.
 * **Advanced Financial Validation:**
-  * Uses Regex string scrubbers (`[^0-9.]`) and Java Streams to extract raw financial data from the UI and mathematically verify dynamic tax algorithms (8% rate).
+  * Uses Regex string scrubbers ("[^0-9.]") and Java Streams to extract raw financial data from the UI and mathematically verify dynamic tax algorithms (8% rate).
 * **Dynamic DOM Handling:**
   * Implements resilient loop structures to overcome React StaleElementReferenceExceptions`.
 * **CI/CD Ready:**
-  * Configured via `testng.xml` for cross-browser execution and categorized TestNG `@Groups` (Smoke/E2E).
+  * Configured via "testng-all-crossbrowser.xml" for cross-browser execution and "testng-smoke.xml" for categorized TestNG "@Groups" (Smoke).
     
 ## 📖 Test Strategy
 The suite is chronologically organized by User Flow (Login -> Catalog -> Cart -> Checkout -> Edge Cases). 
