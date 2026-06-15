@@ -13,7 +13,7 @@ import java.util.Random;
 
 public class ProductsOverviewPage extends BasePage {
 
-    private final By title = By.cssSelector(".title");
+    private final By titleSelector = By.cssSelector(".title");
     private final By sortingDropdownSelector = By.className("product_sort_container");
     private final By shoppingCartSelector = By.cssSelector("a[data-test='shopping-cart-link']");
     private final By shoppingCartBadgeSelector = By.cssSelector(".shopping_cart_badge");
@@ -27,14 +27,14 @@ public class ProductsOverviewPage extends BasePage {
     }
 
     public String getPageTitle() {
-        return getText(title);
+        return getText(titleSelector);
     }
 
     public ArrayList<String> getProductNames() {
         return getTexts(productNameSelector);
     }
 
-    public String selectRandomProductName() {
+    public String getRandomProductName() {
         List<String> products = getProductNames();
         int randomIndex = new Random().nextInt(products.size());
         return products.get(randomIndex);
@@ -69,7 +69,7 @@ public class ProductsOverviewPage extends BasePage {
     }
 
     public ProductsOverviewPage addProductsToTheCart(int amount) {
-        for (int x = 0; x < amount; x++) {
+        for (int count = 0; count < amount; count++) {
            click(addButtonSelector);
         }
         return this;
@@ -79,7 +79,7 @@ public class ProductsOverviewPage extends BasePage {
         return !driver.findElements(removeButtonSelector).isEmpty();
     }
 
-    public ProductsOverviewPage remove(){
+    public ProductsOverviewPage removeProduct(){
         click(removeButtonSelector);
         return this;
     }
@@ -98,7 +98,7 @@ public class ProductsOverviewPage extends BasePage {
         return new ShoppingCartPage(driver).waitForPageLoad();
     }
 
-    public LoginPage logout(){
+    public LoginPage submitLogout(){
         click(burgerButtonSelector);
         click(logoutButtonSelector);
         return new LoginPage(driver);

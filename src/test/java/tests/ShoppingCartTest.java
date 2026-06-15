@@ -42,7 +42,7 @@ public class ShoppingCartTest extends LoggedInBaseTest {
         softly.assertThat(productsOverviewPage.areRemoveButtonsDisplayed())
                 .withFailMessage("The remove button is not found")
                 .isTrue();
-        productsOverviewPage.remove();
+        productsOverviewPage.removeProduct();
         softly.assertThat(productsOverviewPage.getProductsAmountInTheCart())
                 .withFailMessage("The products amount in the shopping cart is not updated correctly")
                 .isEqualTo(amount - 1);

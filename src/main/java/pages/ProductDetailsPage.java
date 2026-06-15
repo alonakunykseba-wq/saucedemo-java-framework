@@ -10,14 +10,14 @@ public class ProductDetailsPage extends BasePage {
         super(driver);
     }
 
-    private final By productNameLocator = By.cssSelector("[data-test='inventory-item-name']");
-    private final By productPriceLocator = By.cssSelector("[data-test='inventory-item-price']");
+    private final By productNameSelector = By.cssSelector("[data-test='inventory-item-name']");
+    private final By productPriceSelector = By.cssSelector("[data-test='inventory-item-price']");
 
     public String getProductName() {
-        return getText(productNameLocator);
+        return getText(productNameSelector);
     }
 
     public double getProductPrice(){
-        return Double.parseDouble(getText(productPriceLocator).replace("$", ""));
+        return Double.parseDouble(getText(productPriceSelector).replace("$", ""));
     }
 }

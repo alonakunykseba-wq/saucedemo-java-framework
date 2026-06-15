@@ -10,7 +10,7 @@ public class LoggedInBaseTest extends BaseTest {
     protected SoftAssertions softly;
 
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void setupTestState() {
         softly = new SoftAssertions();
         productsOverviewPage = loginAsStandardUser();
@@ -19,7 +19,7 @@ public class LoggedInBaseTest extends BaseTest {
                 .isEqualTo("Products");
     }
 
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public void tearDownTestState() {
         if (softly != null) {
             softly.assertAll();

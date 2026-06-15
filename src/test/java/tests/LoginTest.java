@@ -38,7 +38,7 @@ public class LoginTest extends BaseTest {
             and correctly displays the expected error message without granting system access.
             """)
     public void shouldDisplayErrorMessage_whenCredentialsAreInvalid(String login, String password, String expectedErrorMessage) {
-        loginPage.loginUnsuccessfully(
+        loginPage.loginWithFailure(
                 getProperty(login),
                 getProperty(password)
         );

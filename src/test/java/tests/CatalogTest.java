@@ -58,7 +58,7 @@ public class CatalogTest extends LoggedInBaseTest {
             the resulting Product Details page displays the exact same product name and price as the catalog cache.
             """)
     public void shouldMatchCatalogInformation_whenProductDetailsAreOpened(){
-        String expectedName = productsOverviewPage.selectRandomProductName();
+        String expectedName = productsOverviewPage.getRandomProductName();
         double expectedPrice = productsOverviewPage.getProductPriceByName(expectedName);
         ProductDetailsPage details = productsOverviewPage.clickRandomProductLink(expectedName);
         softly.assertThat(details.getProductName())

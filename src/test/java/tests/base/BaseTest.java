@@ -17,22 +17,6 @@ public class BaseTest {
     protected LoginPage loginPage;
     protected ProductsOverviewPage productsOverviewPage;
 
-    public ProductsOverviewPage loginAsStandardUser() {
-        return loginPage.logInSuccessfully(
-                getProperty("standard_user"),
-                getProperty("common_password")
-        );
-    }
-
-    @Parameters("browser")
-    @BeforeMethod
-    public void setup(@Optional("chrome") String browserName) {
-        driver = DriverFactory.getDriver(browserName);
-        driver.manage().window().maximize();
-        driver.get(getProperty("sauce_url"));
-        loginPage = new LoginPage(driver);
-    }
-
     public String getProperty(String key) {
         return ConfigurationManager.getProperty(key);
     }
@@ -41,7 +25,23 @@ public class BaseTest {
         return driver;
     }
 
-    @AfterMethod
+    protected ProductsOverviewPage loginAsStandardUser() {
+        return loginPage.logInSuccessfully(
+                getProperty("standard_user"),
+                getProperty("common_password")
+        );
+    }
+
+    @Parameters("browser")
+    @BeforeMethod(alwaysRun = true)
+    public void setup(@Optional("chrome") String browserName) {
+        driver = DriverFactory.getDriver(browserName);
+        driver.manage().window().maximize();
+        driver.get(getProperty("sauce_url"));
+        loginPage = new LoginPage(driver);
+    }
+
+    @AfterMethod(alwaysRun = true)
     public void tearDown() {
         if (driver != null) driver.quit();
     }

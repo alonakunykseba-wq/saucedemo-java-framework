@@ -55,7 +55,7 @@ public class CheckoutTest extends LoggedInBaseTest {
         softly.assertAll();
     }
 
-    @Test(groups = {"smoke", "e2e"},description = "TC-10: shouldCompletePurchase_whenValidShippingDetailsAreProvided")
+    @Test(groups = {"smoke"},description = "TC-10: shouldCompletePurchase_whenValidShippingDetailsAreProvided")
     @Description("""  
             Verifies the end-to-end Happy Path purchase flow.
             Ensures that a user can successfully add an item to the cart, provide valid checkout information,
@@ -103,7 +103,7 @@ public class CheckoutTest extends LoggedInBaseTest {
     public void shouldPersistCartItems_whenUserLogsOutAndLogsBackIn(){
         productsOverviewPage.addProductsToTheCart(2);
         List <String> expectedProductList = productsOverviewPage.navigateToTheCart().getProductNames();
-        productsOverviewPage.logout();
+        productsOverviewPage.submitLogout();
         loginAsStandardUser();
         List <String> actualProductList = productsOverviewPage.navigateToTheCart().getProductNames();
         assertThat(actualProductList)
