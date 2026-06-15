@@ -1,9 +1,9 @@
-package com.swaglabs.tests;
+package tests;
 
-import com.swaglabs.base.LoggedInBaseTest;
-import framework.pages.swagLabs.CheckoutCompletePage;
-import framework.pages.swagLabs.CheckoutInformationPage;
-import framework.pages.swagLabs.CheckoutOverviewPage;
+import tests.base.LoggedInBaseTest;
+import pages.CheckoutCompletePage;
+import pages.CheckoutInformationPage;
+import pages.CheckoutOverviewPage;
 import io.qameta.allure.Description;
 import org.assertj.core.data.Offset;
 import org.testng.annotations.DataProvider;
@@ -35,12 +35,12 @@ public class CheckoutTest extends LoggedInBaseTest {
                 .checkout();
     }
 
-    @Test(description = "TC-09: verifyCheckoutTotalsAndTaxCalculationsAreAccurate")
+    @Test(description = "TC-09: shouldCalculateAccurateTaxesAndTotals_duringCheckout")
     @Description("""
              Verifies that the system calculates cart totals and taxes accurately by ensuring the sum
              of individual items matches the displayed subtotal, and that the final total correctly includes the applied tax amount.
             """)
-    public void verifyCheckoutTotalsAndTaxCalculationsAreAccurate() {
+    public void shouldCalculateAccurateTaxesAndTotals_duringCheckout() {
         int amount = 3;
         CheckoutOverviewPage checkoutOverview = navigateToCheckoutForm(amount)
                 .fillTheForm(TEST_FIRST_NAME, TEST_LAST_NAME, TEST_ZIP)
@@ -55,13 +55,13 @@ public class CheckoutTest extends LoggedInBaseTest {
         softly.assertAll();
     }
 
-    @Test(groups = {"smoke", "e2e"},description = "TC-10: verifyCheckoutIsSuccessfullyFinished")
+    @Test(groups = {"smoke"},description = "TC-10: shouldCompletePurchase_whenValidShippingDetailsAreProvided")
     @Description("""  
             Verifies the end-to-end Happy Path purchase flow.
             Ensures that a user can successfully add an item to the cart, provide valid checkout information,
             submit the final order, and receive the correct order confirmation message.
     """)
-    public void verifyCheckoutIsSuccessfullyFinished(){
+    public void shouldCompletePurchase_whenValidShippingDetailsAreProvided(){
         int amount = 3;
         CheckoutCompletePage checkoutComplete = navigateToCheckoutForm(amount)
                 .fillTheForm(TEST_FIRST_NAME, TEST_LAST_NAME, TEST_ZIP)
@@ -76,13 +76,13 @@ public class CheckoutTest extends LoggedInBaseTest {
         softly.assertAll();
     }
 
-    @Test(dataProvider = "checkoutInformation", description = "TC-11: verifyCheckoutFormValidationMessagesForMissingFields")
+    @Test(dataProvider = "checkoutInformation", description = "TC-11: shouldDisplayValidationErrors_whenShippingFieldsAreMissing")
     @Description("""
             Verifies that the system handles field validation on the checkout information page correctly:
             appropriate error messages appears when First Name, Last Name, or Postal Code are omitted.
             """)
 
-    public void verifyCheckoutFormValidationMessagesForMissingFields(CheckoutData data) {
+    public void shouldDisplayValidationErrors_whenShippingFieldsAreMissing(CheckoutData data) {
         int amount = 1;
         CheckoutInformationPage buyerInformation = navigateToCheckoutForm(amount)
                 .fillTheForm(data.firstName, data.lastName, data.postalCode);
@@ -93,17 +93,17 @@ public class CheckoutTest extends LoggedInBaseTest {
         softly.assertAll();
     }
 
-    @Test(description = "TC-12: verifyCartItemsPersistAfterRelogin")
+    @Test(description = "TC-12: shouldPersistCartItems_whenUserLogsOutAndLogsBackIn")
     @Description("""
             Verifies shopping cart session persistence.
             Ensures that if a user adds items to their cart, logs out, and subsequently logs back in,
             the system successfully retains the state of the cart and restores all previously added items.
             """)
 
-    public void verifyCartItemsPersistAfterRelogin(){
+    public void shouldPersistCartItems_whenUserLogsOutAndLogsBackIn(){
         productsOverviewPage.addProductsToTheCart(2);
         List <String> expectedProductList = productsOverviewPage.navigateToTheCart().getProductNames();
-        productsOverviewPage.logout();
+        productsOverviewPage.submitLogout();
         loginAsStandardUser();
         List <String> actualProductList = productsOverviewPage.navigateToTheCart().getProductNames();
         assertThat(actualProductList)

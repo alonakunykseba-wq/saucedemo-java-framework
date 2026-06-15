@@ -1,4 +1,4 @@
-package framework.pages.swagLabs;
+package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -11,13 +11,6 @@ public class ShoppingCartPage extends BasePage{
 
     public ShoppingCartPage(WebDriver driver) {
         super(driver);
-    }
-
-    public List<Double> getProductPrices(){
-        List<String> rawPrices = getTexts(productPriceSelector);
-        return rawPrices.stream()
-                .map(price -> Double.parseDouble(price.replace("$", "")))
-                .toList();
     }
 
     public List<String> getProductNames(){

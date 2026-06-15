@@ -1,7 +1,7 @@
-package com.swaglabs.tests;
+package tests;
 
-import com.swaglabs.base.LoggedInBaseTest;
-import framework.pages.swagLabs.ProductDetailsPage;
+import tests.base.LoggedInBaseTest;
+import pages.ProductDetailsPage;
 import io.qameta.allure.Description;
 import org.testng.annotations.Test;
 
@@ -14,13 +14,13 @@ public class CatalogTest extends LoggedInBaseTest {
 
     // Test is currently disabled because the "Test.allTheThings() T-Shirt"
     // violates the Sauce Labs branding rules. This is a known bug on the site.
-    @Test(enabled = false, groups ={"smoke"}, description = "TC-05: verifyProductCatalogCountAndBrandingConsistency")
+    @Test(enabled = false, groups ={"smoke"}, description = "TC-05: shouldDisplaySixProductsWithCorrectBranding_onInitialLoad")
     @Description("""
             Verifies the integrity of the product catalog by ensuring that exactly 6 products are loaded on the page,
             all product names strictly contain the 'Sauce Labs' branding,
             and all product prices are correctly formatted with the USD ($) currency symbol.
             """)
-    public void verifyProductCatalogCountAndBrandingConsistency() {
+    public void shouldDisplaySixProductsWithCorrectBranding_onInitialLoad() {
 
         List<String> productNamesList = productsOverviewPage.getProductNames();
         List<String> badNames = productNamesList.stream()
@@ -39,26 +39,26 @@ public class CatalogTest extends LoggedInBaseTest {
         softly.assertAll();
     }
 
-    @Test (groups ={"smoke"}, description ="TC-06: verifyHighToLowPriceSortingLogic")
+    @Test (groups ={"smoke"}, description ="TC-06: shouldSortProductsByPriceDescending_whenHighToLowFilterIsApplied")
     @Description("""
             Verifies that the catalog sorting mechanism successfully applies the 'Price (high to low)' filter,
                         and correctly rearranges all product prices on the page into strictly descending order.
             """)
-    public void verifyHighToLowPriceSortingLogic(){
+    public void shouldSortProductsByPriceDescending_whenHighToLowFilterIsApplied(){
         productsOverviewPage.applySortingFilter("Price (high to low)");
         assertThat(productsOverviewPage.getProductPrices())
                 .withFailMessage("The prices are not sorted in descending order")
                 .isSortedAccordingTo(Comparator.reverseOrder());
     }
 
-    @Test (description = "TC-13: verifyProductDetailsMatchCatalogInformation")
+    @Test (description = "TC-13: shouldMatchCatalogInformation_whenProductDetailsAreOpened")
     @Description("""
             Verifies data synchronization between the high-level catalog and individual item pages.
             Ensures that when a specific product is clicked,
             the resulting Product Details page displays the exact same product name and price as the catalog cache.
             """)
-    public void verifyProductDetailsMatchCatalogInformation(){
-        String expectedName = productsOverviewPage.selectRandomProductName();
+    public void shouldMatchCatalogInformation_whenProductDetailsAreOpened(){
+        String expectedName = productsOverviewPage.getRandomProductName();
         double expectedPrice = productsOverviewPage.getProductPriceByName(expectedName);
         ProductDetailsPage details = productsOverviewPage.clickRandomProductLink(expectedName);
         softly.assertThat(details.getProductName())

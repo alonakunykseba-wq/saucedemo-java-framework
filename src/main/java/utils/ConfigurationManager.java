@@ -1,15 +1,15 @@
-package framework.utils;
+package utils;
 
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
 public class ConfigurationManager {
-    private static Properties properties;
+    private final static Properties properties;
     static {
         properties = new Properties();
-        try (FileInputStream file = new FileInputStream("src/test/resources/config.properties")) {
-            properties.load(file);
+        try (InputStream input = ConfigurationManager.class.getClassLoader().getResourceAsStream("config.properties")) {
+            properties.load(input);
         } catch (IOException e) {
 
             throw new RuntimeException("Failed to load config.properties file!", e);

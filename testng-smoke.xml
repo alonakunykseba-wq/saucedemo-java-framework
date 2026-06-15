@@ -1,0 +1,19 @@
+<suite name="SwagLabs Automation Smoke Suite">
+    <listeners>
+        <listener class-name="tests.listeners.TestListener" />
+    </listeners>
+
+    <test name="Smoke Suite">
+        <groups>
+            <run>
+                <include name="smoke"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="tests.LoginTest" />
+            <class name="tests.CatalogTest" />
+            <class name="tests.ShoppingCartTest" />
+            <class name="tests.CheckoutTest" />
+        </classes>
+    </test>
+</suite>

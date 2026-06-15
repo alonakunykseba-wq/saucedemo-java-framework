@@ -1,0 +1,27 @@
+<suite name="SwagLabs Automation Regression Suite"
+       parallel="tests"
+       thread-count="2">
+    <listeners>
+        <listener class-name="tests.listeners.TestListener" />
+    </listeners>
+    
+    <test name="Firefox Regression Suite">
+        <parameter name="browser" value="firefox"/>
+        <classes>
+            <class name="tests.LoginTest" />
+            <class name="tests.CatalogTest" />
+            <class name="tests.ShoppingCartTest" />
+            <class name="tests.CheckoutTest" />
+        </classes>
+    </test>
+
+    <test name="Chrome Regression Suite">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="tests.LoginTest" />
+            <class name="tests.CatalogTest" />
+            <class name="tests.ShoppingCartTest" />
+            <class name="tests.CheckoutTest" />
+        </classes>
+    </test>
+</suite>

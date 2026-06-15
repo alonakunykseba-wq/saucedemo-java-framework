@@ -1,13 +1,14 @@
-package com.swaglabs.tests;
-import com.swaglabs.base.SwagLabsBase;
+package tests;
 
 import io.qameta.allure.Description;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import pages.ProductsOverviewPage;
+import tests.base.BaseTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LoginTest extends SwagLabsBase {
+public class LoginTest extends BaseTest {
     @DataProvider(name = "invalidLoginData")
     public Object[][] invalidLoginData() {
         return new Object[][] {
@@ -17,28 +18,27 @@ public class LoginTest extends SwagLabsBase {
         };
     }
 
-
-    @Test(groups = {"smoke"}, description = "TC-01: verifySuccessfulLoginRedirectsToInventory")
+    @Test(groups = {"smoke"}, description = "TC-01: shouldRedirectToInventory_whenLoginIsSuccessful")
     @Description("""
     Verifies that a standard user with valid credentials can successfully log in and
     is automatically redirected to the main Products Inventory page.
     """)
-    public void verifySuccessfulLoginRedirectsToInventory(){
-        loginAsStandardUser();
-        assertThat(getProductsOverviewPage().getPageTitle())
+    public void shouldRedirectToInventory_whenLoginIsSuccessful(){
+        ProductsOverviewPage productsOverviewPage = loginAsStandardUser();
+        assertThat(productsOverviewPage.getPageTitle())
                 .withFailMessage("Page title is not as expected")
                 .isEqualTo("Products");
     }
 
-    @Test(dataProvider = "invalidLoginData", description = "Verify Login Error Messages")
+    @Test(dataProvider = "invalidLoginData", description = "TC-02: shouldDisplayErrorMessage_whenCredentialsAreInvalid")
     @Description("""
             Data-driven negative test suite.
             Verifies that the system securely intercepts invalid login attempts
             (including locked-out accounts, bad credentials, and empty fields)
             and correctly displays the expected error message without granting system access.
             """)
-    public void verifyErrorMessageWhenLoginIsNotSuccessful(String login, String password, String expectedErrorMessage) {
-        loginPage.loginUnsuccessfully(
+    public void shouldDisplayErrorMessage_whenCredentialsAreInvalid(String login, String password, String expectedErrorMessage) {
+        loginPage.loginWithFailure(
                 getProperty(login),
                 getProperty(password)
         );

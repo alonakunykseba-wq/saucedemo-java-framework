@@ -1,4 +1,4 @@
-package framework.pages.swagLabs;
+package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -21,7 +21,7 @@ public class LoginPage extends BasePage {
         return new ProductsOverviewPage(driver).waitForPageLoad();
     }
 
-    public LoginPage loginUnsuccessfully(String username, String password) {
+    public LoginPage loginWithFailure(String username, String password) {
         enterText(usernameField, username);
         enterText(passwordField, password);
         click(loginButton);
